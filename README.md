@@ -1,2 +1,10 @@
 # arduino-serialThroughWeb
-Simple code to send arduino's collected data from a computer to another using rest api in node
+Simple program to send arduino's collected data from a computer to another using a simple restfull api and Ngrok.
+
+The system uses a simple node.js code to send the data readed from serial port to an external api using a http post request. There is also a simple express rest api to recive the data sent. 
+
+Among the files there is a step-by-step well humored manual on how to setup and use the system. 
+
+This program was original created to help out the Physics Engeeniring students of EEL/USP on Microprocessors lecture.
+
+
