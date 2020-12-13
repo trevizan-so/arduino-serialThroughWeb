@@ -1,5 +1,5 @@
 {
-  "name": "node_clientArduino",
+  "name": "node_client-arduino",
   "version": "1.0.0",
   "description": "Simple data exchange through web",
   "main": "index.js",
