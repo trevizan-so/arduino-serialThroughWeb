@@ -1,5 +1,6 @@
-BOM DIA CENOURAS E CENOURES.
-NO TXT DE HOJE VOU ENSINAR COMO USAR OS PROGRAMAS.
+Salve Pessoal, aqui é o Trev!
+
+Vamos lá explicar como funciona tudo. 
 
 Dentro do arquivo tem dois programas diferentes:
 	node_clientArduino: Programinha pra ler a porta serial e mandar pro sever.
