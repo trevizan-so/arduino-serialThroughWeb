@@ -16,6 +16,3 @@ void loop() {
   Serial.println(ref1);
   delay(500);
 }
-
-
-https://github.com/trevizan-so/arduino-serialThroughWeb.git
