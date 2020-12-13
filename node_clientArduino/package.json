@@ -1,0 +1,16 @@
+{
+  "name": "node_clientArduino",
+  "version": "1.0.0",
+  "description": "Simple data exchange through web",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index"
+  },
+  "author": "trevizan-so",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.21.0",
+    "serialport": "^9.0.3"
+  }
+}
