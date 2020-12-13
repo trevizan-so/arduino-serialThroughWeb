@@ -1,0 +1,62 @@
+BOM DIA CENOURAS E CENOURES.
+NO TXT DE HOJE VOU ENSINAR COMO USAR OS PROGRAMAS.
+
+Dentro do arquivo tem dois programas diferentes:
+	node_clientArduino: Programinha pra ler a porta serial e mandar pro sever.
+	node_severSide: Programa pra dar setup do sever.
+
+O client arduino tem que ser rodado no pc em que o arduino esta conectado e o outro no pc do excel.
+
+------------------------------INSTALANDO--------------------------------------------------------------
+
+1) Vai no site do node e instala, pode ser qqr versao LTE (mais estavel) ou Ultima (mais recente). ( Nas opcoes de instalacao, caso haja uma opcao/caixa escrito PATH marca ela)
+2) Quarda a pastinha com o programa que vai na sua maquina numa pasta qualquer, segue um exemplo:
+	C://Usuario/Lukas/TaylorDiva/TrabShigue5
+3) Abre o prompt de comando (cmd), vamos usar ele para rodar o programa. Execute as seguintes linhas
+	>> cd C://Usuario/Lukas/TaylorDiva/TrabShigue5/node_clientArduino (isso vai mover o diretorio para dentro da pasta do programa);
+	>> npm install (isso vai instalar as dependencias que o programa precisa pra rodar);
+
+----------------------------RODANDO O PROGRAMA---------------------------------------------
+
+-------->Client Arduino
+
+1) Alterando as configuracoes: Vai no arquivo index.js dentro da pasta do programa, e altere as seguintes linhas: ( da pra alterar com qqr editor de texto, recomendo bloco de notas pq tem em qualquer maquina);
+	const credenciais = {
+    		host: "http://127.0.0.1", ( coloque aqui, nesse formato o ip do sever: se for na mesma maquina vai ser esse do lado. Se for via web, tem que colocar o link com http:// antes)  - PEDIR O LINK COM QUEM SETOU O SEVER
+    		port: 3000,	    
+    		route: "/"
+	};
+
+const arduino = {
+    serialPort: "COM5",		(coloca a porta que o ardu ta conectado, checa na ide pra saber qual 'e)
+    baudRate: 9600			(coloca qual a baudRate setada no Serial.begin(9600))
+};
+
+2) Rodando o programa: Abre o prompt de comando ( cmd  ), e roda os seguintes comandos:
+	>> cd C://Usuario/Lukas/TaylorDiva/TrabShigue5/node_clientArduino (isso vai mover o diretorio para dentro da pasta do programa);
+	>> npm start (isso vai rodar o programa);
+
+3) Vai comecar a aparecer na tela os dados printados pelo arduino seguido de uma mensagem, se aparecer : "mensagem enviada", deu bom; se aparecer "Ops, deu erro", deu erro. Se isso acontecer provavel das credenciasi estarem erradas. Checa isso. 
+
+-------->Sever Side:
+ 1) Rodando o programa: Abre o prompt de comando ( cmd  ), e roda os seguintes comandos:
+	>> cd C://Usuario/Lukas/TaylorDiva/TrabShigue5/node_severSide (isso vai mover o diretorio para dentro da pasta do programa);
+	>> npm start (isso vai rodar o programa);
+
+O comando acima faz com que vc abra um servidor localmente no seu computador, isso funciona bem pra dispositivos conectados em lan, mas nao web. Entao precisamos ajeitar para web;
+Para colocar realmente na web precisariamos de um dominio (DNS, tipo www.trevizan-so.com) e abrir as portas do nosso pc como publicas... ou seja muito trampo pra shigue 5. Entao usaremos um programinha chamado Ngrok
+
+2) Instalando o Ngrok: Vai no site do Ngrok e baixa. Nao assusta que vai ser s'o um .zip com um .exe dentro
+
+3) Roda o Ngrok ( abre o .exe), vai abrir um terminalzinho estranho, e digite esse comando.
+		>> ngrok http 3000 ( isso vai abrir um tunel da web pro sever que criamos, nao sei bem como funciona, deve envolver magia negra e musica country)
+
+4) Configurando o client: No terminal do ngrok vai aparecer um link, algo bizzaro cheio de letra e numero, terminando com ngrok.io. Copia esse link e passa pra quem tiver no pc do cliente
+
+5) Testando: Abre o chrome ( ou qqr outro navegador) e abra o link, vai aparecer ou "[ ]" se o arduino nao tiver conectado, ou, [0,1, 2... ou seja la oq o arduino ta printando no serial ... 5, 6 ... 0] caso o ardu estaja conectado. Mas fica de olho que s'o atualiza se vc aperta F5 
+
+-------->NOTAS
+	SE FECHAR OS CMDS O ROLE PARA DE FUNCIONAR, no prompt do sever vai aparecer todos os dados que chegarem nele.
+	Para usar as informacoes, tem que programar o excell para pegar os dados tambem. Entao tem que configurar o vba para fazer uma requisicao http do tipo GET para O LINK FORNECIDO DO NGROK ou HTTP://LOCALHOST:3000/ ( se for na mesma maquina );
+	Eu fiz uma api simplificada pq ela guarda os dados dentro dela: Como nao usa uma database que salva as coisas no hd os dados chegos no sever ficam guardados na memoria ram,  se o ardu mandar algumas horas dados pode dar erro);
+
