@@ -1,10 +1,13 @@
 
 const credenciais = {
     host: "http://127.0.0.1",
-    port: 3000,
+    port: 3000,     //comente essa linha caso esteja utilizando o link do NGROK
     route: "/"
-
 };
+
+let url = `${credenciais.host}:${credenciais.port}`;
+if(!credenciais.port || credenciais.port == ""){url = credenciais.host}
+
 const arduino = {
     serialPort: "COM5",
     baudRate: 9600
@@ -28,7 +31,7 @@ const setupAndRun = (callback) => {
 
 const sendDataToSever = (data) => {
     console.log(data.value)
-    axios.post(`${credenciais.host}:${credenciais.port}${credenciais.route}`, {...data}, { headers: { "Content-Type": "application/json" } })
+    axios.post(`${url}${credenciais.route}`, {...data}, { headers: { "Content-Type": "application/json" } })
         .then(() => { console.log(stringMensagem.sucesso) })
         .catch((err) => { console.log(stringMensagem.erro, '\n\n\n')})
 }
